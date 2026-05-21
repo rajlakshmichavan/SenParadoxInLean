@@ -1,0 +1,14 @@
+name = "EconomicTheoryInLean"
+version = "0.1.0"
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "master"
+defaultTargets = ["economictheoryinlean"]
+
+[[lean_lib]]
+name = "EconomicTheoryInLean"
+
+[[lean_exe]]
+name = "economictheoryinlean"
+root = "Main"
