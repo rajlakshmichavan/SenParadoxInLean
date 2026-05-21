@@ -4,7 +4,7 @@ Formalisation of Amartya Sen's Impossibility of a Paretian Liberal (1970) in Lea
 
 ## Overview
 
-This repository contains a formal proof of Sen's Theorem II — that no Social Decision Function can simultaneously satisfy Unrestricted Domain (U), the Pareto Principle (P), and Minimal Liberalism (L').
+This repository contains a formal proof of Sen's Theorem II: no Social Decision Function can simultaneously satisfy Unrestricted Domain (U), the Pareto Principle (P), and Minimal Liberalism (L').
 
 ## Structure
 
