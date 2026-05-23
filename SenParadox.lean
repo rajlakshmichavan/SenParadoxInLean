@@ -6,50 +6,50 @@ import Mathlib
 -- §1: Defining Basic Types
 def PreferenceRelation (Alt : Type*) := Alt → Alt → Prop
 
--- §3: Defining what makes a preference relation an ordering
+-- §2: Defining what makes a preference relation an ordering
 structure IsWeakOrder (R : PreferenceRelation Alt) : Prop where
   refl  : ∀ x : Alt, R x x
   trans : ∀ x y z : Alt, R x y → R y z → R x z
   total : ∀ x y : Alt, R x y ∨ R y x
 
--- §4: Defining the profile
+-- §3: Defining the profile
 def Profile (Individual : Type*) (Alt : Type*) :=
   Individual → PreferenceRelation Alt
 
--- §5: Defining the Collective Choice Rule (CCR)
+-- §4: Defining the Collective Choice Rule (CCR)
 def CCR (Individual : Type*) (Alt : Type*) :=
   Profile Individual Alt → PreferenceRelation Alt
 
--- §6: Social Welfare Function (SWF)
+-- §7: Social Welfare Function (SWF)
 def SWF {Individual : Type*} {Alt : Type*} (f : CCR Individual Alt) : Prop :=
   ∀ (p : Profile Individual Alt), IsWeakOrder (Alt := Alt) (f p)
 
--- §7: Choice Function
+-- §8: Choice Function
 def GeneratesChoiceFunction (R : PreferenceRelation Alt) : Prop :=
   ∀ (S : Finset Alt), S.Nonempty →
     ∃ x ∈ S, ∀ y ∈ S, R x y
 
--- §8: Social Decision Function (SDF)
+-- §9: Social Decision Function (SDF)
 def SDF {Individual : Type*} {Alt : Type*} (f : CCR Individual Alt) : Prop :=
   ∀ (p : Profile Individual Alt), GeneratesChoiceFunction (Alt := Alt) (f p)
 
--- §9: Condition U - Unrestricted Domain
+-- §10: Condition U - Unrestricted Domain
 def ConditionU (_f : CCR Individual Alt) : Prop := True
 
--- §10: Condition P - Pareto Principle
+-- §11: Condition P - Pareto Principle
 def ConditionP (f : CCR Individual Alt) : Prop :=
   ∀ (p : Profile Individual Alt) (x y : Alt),
     (∀ i : Individual, p i x y ∧ ¬ p i y x) →
     (f p x y ∧ ¬ f p y x)
 
--- §11: Condition L - Liberalism
+-- §12: Condition L - Liberalism
 def ConditionL (f : CCR Individual Alt) : Prop :=
   ∀ i : Individual, ∃ x y : Alt, x ≠ y ∧
     ∀ (p : Profile Individual Alt),
       (p i x y ∧ ¬ p i y x → f p x y ∧ ¬ f p y x) ∧
       (p i y x ∧ ¬ p i x y → f p y x ∧ ¬ f p x y)
 
--- §12: Condition L* - Minimal Liberalism
+-- §13: Condition L* - Minimal Liberalism
 def ConditionL' (f : CCR Individual Alt) : Prop :=
   ∃ i j : Individual, i ≠ j ∧
     (∃ x y : Alt, x ≠ y ∧
@@ -128,7 +128,7 @@ private lemma sen_disjoint_case {Individual Alt : Type*} [DecidableEq Alt]
   · simp +decide;
   · grind
 
--- §13: Theorem II - The Impossibility of a Paretian Liberal
+-- §14: Theorem II - The Impossibility of a Paretian Liberal
 -- Following Sen (1970), the proof considers two cases for the decisive pairs (x,y) and (z,w):
 --   Case 1: x = z (the pairs share an element)
 --   Case 2: All four elements x, y, z, w are distinct
